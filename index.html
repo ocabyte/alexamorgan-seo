@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexa Morgan - SEO Strategist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FAF8F3;
+            color: #2D2D2D;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Canvas Background Shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.06;
+            z-index: 0;
+        }
+
+        .shape1 {
+            width: 400px;
+            height: 400px;
+            background: #6B8E7F;
+            top: -100px;
+            right: -100px;
+        }
+
+        .shape2 {
+            width: 300px;
+            height: 300px;
+            background: #C17767;
+            bottom: 100px;
+            left: -80px;
+        }
+
+        .shape3 {
+            width: 250px;
+            height: 250px;
+            background: #4A5D7C;
+            top: 50%;
+            right: 10%;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 18px 40px;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            width: 700px;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: #2D2D2D;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2D2D2D;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #6B8E7F;
+        }
+
+        /* Container */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            font-weight: 900;
+            color: #2D2D2D;
+        }
+
+        .hero-text .subtitle {
+            font-size: 20px;
+            color: #5A5A5A;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: rotate(2deg);
+            transition: transform 0.4s ease;
+        }
+
+        .hero-image img:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 60px;
+            line-height: 1.2;
+        }
+
+        /* About Section */
+        .about-card {
+            background: white;
+            padding: 60px;
+            border-radius: 40px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            transform: rotate(-1deg);
+            transition: transform 0.4s ease;
+        }
+
+        .about-card:hover {
+            transform: rotate(0deg) translateY(-5px);
+        }
+
+        .about-card p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #4A4A4A;
+            margin-bottom: 25px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .skill-card:nth-child(odd) {
+            transform: rotate(-2deg);
+        }
+
+        .skill-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .skill-card:hover {
+            transform: rotate(0deg) translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .skill-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #6B8E7F;
+            margin-bottom: 15px;
+        }
+
+        .skill-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .skill-card p {
+            color: #5A5A5A;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Journey Section */
+        .journey-timeline {
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .journey-item {
+            background: white;
+            padding: 50px;
+            border-radius: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 12px 45px rgba(0, 0, 0, 0.08);
+            margin-left: 40px;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 0.6s forwards;
+        }
+
+        .journey-item:nth-child(1) { animation-delay: 0.1s; }
+        .journey-item:nth-child(2) { animation-delay: 0.2s; }
+        .journey-item:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .journey-item:hover {
+            transform: translateX(10px);
+        }
+
+        .journey-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: #C17767;
+            margin-bottom: 15px;
+        }
+
+        .journey-item h3 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .journey-item p {
+            color: #5A5A5A;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* Wins Section */
+        .wins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .win-card {
+            background: linear-gradient(135deg, #6B8E7F 0%, #4A5D7C 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 35px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            transform: rotate(-3deg);
+            transition: transform 0.4s ease;
+        }
+
+        .win-card:nth-child(even) {
+            transform: rotate(3deg);
+        }
+
+        .win-card:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .win-stat {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .win-card p {
+            font-size: 19px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* Testimonials */
+        .testimonial {
+            background: white;
+            padding: 70px;
+            border-radius: 40px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            margin: 60px 0;
+            transform: rotate(1deg);
+        }
+
+        .testimonial blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            line-height: 1.5;
+            color: #2D2D2D;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-size: 18px;
+            color: #6B8E7F;
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .contact-card {
+            background: linear-gradient(135deg, #4A5D7C 0%, #6B8E7F 100%);
+            color: white;
+            padding: 80px 60px;
+            border-radius: 45px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            margin-bottom: 30px;
+            font-weight: 900;
+        }
+
+        .contact-card p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background: white;
+            color: #4A5D7C;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 17px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            color: #5A5A5A;
+            font-size: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                width: 90%;
+                padding: 15px 25px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 48px;
+            }
+
+            .hero-image img {
+                max-width: 300px;
+                margin: 0 auto;
+                display: block;
+            }
+
+            .section-title {
+                font-size: 40px;
+            }
+
+            .about-card {
+                padding: 40px 30px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wins-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial {
+                padding: 40px 30px;
+            }
+
+            .testimonial blockquote {
+                font-size: 24px;
+            }
+
+            .contact-card {
+                padding: 50px 30px;
+            }
+
+            .contact-card h2 {
+                font-size: 36px;
+            }
+
+            .journey-item {
+                margin-left: 0;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Alexa Morgan</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>SEO is not about rankings. It's about relevance.</h1>
+                    <p class="subtitle">I help brands become impossible to ignore by creating search strategies that connect people with the answers they're actually looking for.</p>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=700&fit=crop" alt="Portrait">
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="fade-in">
+            <h2 class="section-title">Who I am & what I believe</h2>
+            <div class="about-card">
+                <p>SEO isn't a dark art. It's not about tricking algorithms or stuffing keywords into places they don't belong. It's about understanding how people search, what they need, and making sure your content shows up when it matters most.</p>
+                <p>I've spent the last 6 years helping brands—from scrappy startups to established companies—build organic visibility that actually drives business results. Not vanity metrics. Not just traffic. Real, measurable growth.</p>
+                <p>My approach combines technical precision with creative storytelling. Because great SEO happens where data meets humanity.</p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="fade-in">
+            <h2 class="section-title">What I do best</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-number">01</div>
+                    <h3>Technical SEO</h3>
+                    <p>Site architecture, crawlability, Core Web Vitals, schema markup—making sure search engines can find, understand, and love your content.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-number">02</div>
+                    <h3>Content Strategy</h3>
+                    <p>Keyword research that goes beyond search volume. Building content that answers real questions and solves real problems.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-number">03</div>
+                    <h3>Link Building</h3>
+                    <p>Earning high-quality backlinks through outreach, partnerships, and creating content worth linking to—no shortcuts, no spam.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-number">04</div>
+                    <h3>Analytics & Insights</h3>
+                    <p>Turning data into stories. Using GA4, Search Console, and custom dashboards to understand what's working and what's not.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Section -->
+        <section id="journey" class="fade-in">
+            <h2 class="section-title">My journey so far</h2>
+            <div class="journey-timeline">
+                <div class="journey-item">
+                    <div class="journey-year">2018</div>
+                    <h3>Started as a Content Writer</h3>
+                    <p>Fell in love with search after seeing how a single well-optimized article could drive thousands of visitors. Decided this was what I wanted to do forever.</p>
+                </div>
+                <div class="journey-item">
+                    <div class="journey-year">2020</div>
+                    <h3>Became an SEO Specialist</h3>
+                    <p>Joined a digital agency and learned the full stack—technical audits, link building, local SEO. Worked with 30+ clients across e-commerce, SaaS, and publishing.</p>
+                </div>
+                <div class="journey-item">
+                    <div class="journey-year">2023</div>
+                    <h3>Went Independent</h3>
+                    <p>Started consulting for brands I believe in. Now I get to focus on strategy, results, and building long-term partnerships instead of churning reports.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wins Section -->
+        <section class="fade-in">
+            <h2 class="section-title">Some wins I'm proud of</h2>
+            <div class="wins-grid">
+                <div class="win-card">
+                    <div class="win-stat">240%</div>
+                    <p>Organic traffic increase for a SaaS startup in 8 months through strategic content and technical improvements.</p>
+                </div>
+                <div class="win-card">
+                    <div class="win-stat">#1</div>
+                    <p>Ranked a client for 15+ high-intent keywords, including beating enterprise competitors with 100x their budget.</p>
+                </div>
+                <div class="win-card">
+                    <div class="win-stat">$400K</div>
+                    <p>Revenue generated from organic search for an e-commerce client in a single year through product page optimization.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="fade-in">
+            <h2 class="section-title">Kind words</h2>
+            <div class="testimonial">
+                <blockquote>"Alexa took our SEO from an afterthought to our primary growth channel. The results speak for themselves, but what really stands out is the clarity and strategy behind every decision."</blockquote>
+                <div class="testimonial-author">— Sarah Chen, Head of Marketing at GrowthLabs</div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="fade-in">
+            <div class="contact-card">
+                <h2>Let's work together</h2>
+                <p>Whether you're just getting started or looking to scale, I'd love to hear about your goals and see how I can help.</p>
+                <div class="contact-links">
+                    <a href="mailto:hello@alexmorgan.com" class="contact-btn">Send an Email</a>
+                    <a href="https://linkedin.com" class="contact-btn" target="_blank">Connect on LinkedIn</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Alexa Morgan. Built By <a href="https://www.facebook.com/profile.php?id=100063808086007"><u>OcaByte</u>.</a></p>
+    </footer>
+
+    <!-- Lightweight Scroll Animation Script -->
+    <script>
+        // Scroll animation observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
